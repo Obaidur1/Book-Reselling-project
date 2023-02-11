@@ -5,8 +5,16 @@ Track Order
 {% block body %}
 
 
-<div class="container" style="width:70%; margin-top:10%; font-family: 'El Messiri', sans-serif;">
-<h1 class="text-center my-5" ><span style="border-bottom:4px dotted;"> Enter Order ID To Track Your Order</span></h1>
+<div class="container" style="width:70%; margin-top:10%;" >
+    <div class="text-left my-3" >
+        <h2>Recent Orders</h2>
+        {% for order in orders %}
+        <p>Order id: {{ order.order_id}} Name: {{ order.name }}</p>
+        {% endfor %}
+    </div>
+<div class="text-left my-3" >
+    <h2>Enter Order ID To Track Your Order</h2>
+</div>
 <form action="TrackOrder" method='post'>
 {% csrf_token %}
             <div class="form">

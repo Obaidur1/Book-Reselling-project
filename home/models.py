@@ -25,8 +25,8 @@ class Order(models.Model):
     state = models.CharField(max_length=1101)
     zip_code = models.CharField(max_length=1011)
     phone = models.CharField(max_length=1011, default="")
-    def __str__(self):
-        return "ORDER ID: "+str(self.order_id) +", from - "+ str(self.state)+ ", city: " +str(self.city)
+    # def __str__(self):
+    #     return "ORDER ID: "+str(self.order_id) +", from - "+ str(self.state)+ ", city: " +str(self.city)
 
 class TrackUpdate(models.Model):
     order_id = models.CharField(max_length=900,default="")     

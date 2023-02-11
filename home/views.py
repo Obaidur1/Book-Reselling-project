@@ -92,7 +92,7 @@ def checkout(request):
     if request.method=="POST":
         items_json = request.POST.get('itemsJson', '')
         name = request.POST.get('name', '')
-        email = request.POST.get('email', '')
+        email = request.user.email
         address = request.POST.get('address1', '') + " " + request.POST.get('address2', '')
         city = request.POST.get('city', '')
         state = request.POST.get('state', '')
@@ -108,22 +108,24 @@ def checkout(request):
         id = order.order_id
         return render(request, 'home/checkout.html', {'thank':thank, 'id': id})
     return render(request, 'home/checkout.html')
-
+@login_required(login_url='/loginsignup')
 def TrackOrder(request):
+    mail = request.user.email
+    orders = Order.objects.filter(email=mail)
     if request.method == "POST":
         order_id = request.POST.get('order_id')
         updates = TrackUpdate.objects.filter(order_id=order_id)
         context = {'updates':updates}
         return render(request,'home/updatepage.html',context)
 
-    return render(request,'home/trackorder.html')
+    return render(request,'home/trackorder.html',{'orders':orders})
 
 def search(request):
     searchquery = request.GET['search']
     if len(searchquery)>=50:
-        allposts = Post.objects.none()
-    if len(searchquery)<1:
-        allposts = Post.objects.none()
+        #allposts = Post.objects.none()
+   # if len(searchquery)<1:
+       # allposts = Post.objects.none()
         messages.error(request,'Please enter more than 4 characters')
         redirect('/')
     else:    
@@ -135,4 +137,9 @@ def search(request):
         return render(request,'home/search.html',context)
     return render(request,'home/search.html')
 
-    
+
+@login_required(login_url='/loginsignup')
+def my_orders(request):
+    mail = request.user.email
+    orders = Order.objects.filter(email=mail)
+    return render(request,'home/orders.html',{'orders':orders})
