@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render,HttpResponse,redirect
 from .models import books
 from django.contrib.auth.models import User
@@ -142,4 +143,9 @@ def search(request):
 def my_orders(request):
     mail = request.user.email
     orders = Order.objects.filter(email=mail)
-    return render(request,'home/orders.html',{'orders':orders})
+    for order in orders:
+        order.items_json = json.loads(order.items_json)
+    context = {
+        'orders': orders,
+    }
+    return render(request,'home/orders.html',context)

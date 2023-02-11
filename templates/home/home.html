@@ -41,7 +41,7 @@ Home page
             <div class="card mb-5" style="width: 10rem;">
               <img src='{{i.image.url}}' class="card-img-top p-2" style="width: 158px; height: 230px;">
               <div class="card-body">
-                <h6 class="card-title" id = "namepr{{i.slug}}">{{i.book_name|truncatechars:23}}</h6>
+                <h6 class="card-title" id = "namepr{{i.slug}}">{{i.book_name}}</h6>
                 <small><p class="card-text text-danger" >&#8377;{{i.price}}</p></small>
                 <span id='divpr{{i.slug}}'><button id='pr{{i.slug}}' class="btn btn-primary cart"><b>Add To Cart</b></button></span>
               </div>
@@ -59,7 +59,7 @@ Home page
           <div class="card mb-5" style="width: 10rem;">
             <img src='{{i.image.url}}' class="card-img-top p-2" style="width: 158px; height: 230px;">
             <div class="card-body">
-              <h6 class="card-title" id = "namepr{{i.slug}}">{{i.book_name|truncatechars:23}}</h6>
+              <h6 class="card-title" id = "namepr{{i.slug}}">{{i.book_name}}</h6>
               <small><p class="card-text text-danger" >&#8377;{{i.price}}</p></small>
               <span id='divpr{{i.slug}}'><button id='pr{{i.slug}}' class="btn btn-primary cart"><b>Add To Cart</b></button></span>
             </div>
@@ -106,12 +106,14 @@ if (localStorage.getItem('cart') == null) {
 // If the add to cart button is clicked, add/increment the item
 $('.cart').click(function() {
     var idstr = this.id.toString();
+    //console.log(idstr)
     if (cart[idstr] != undefined) {
         qty = cart[idstr][0] + 1;
     } else {
         qty = 1;
         name = document.getElementById('name'+idstr).innerHTML;
         cart[idstr] = [qty,name];
+        console.log(cart[idstr][1])
     }
     updateCart(cart);
     updatePopover(cart)
