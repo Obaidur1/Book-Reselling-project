@@ -1,4 +1,4 @@
-from . models import books
+from . models import books,UserProfile
 from django import forms
 
 class sellbookform(forms.ModelForm):
@@ -42,3 +42,10 @@ class sellbookform(forms.ModelForm):
             'class': 'form-control'
         })
     )    
+
+
+#user profle form
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields:fields = ['full_name','address', 'address2', 'city', 'state', 'zip_code', 'phone_number']

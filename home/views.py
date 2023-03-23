@@ -5,8 +5,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from . forms import sellbookform 
-from .models import Order,TrackUpdate
+from . forms import sellbookform ,UserProfileForm
+from .models import Order,TrackUpdate,UserProfile
 # Create your views here.
 def loginsignup(request):
     return render(request,'home/loginlink.html')
@@ -149,3 +149,20 @@ def my_orders(request):
         'orders': orders,
     }
     return render(request,'home/orders.html',context)
+
+
+
+#user dashboard or profile view
+def dashboard_view(request):
+    try:
+        user_profile = request.user.userprofile
+    except UserProfile.DoesNotExist:
+        user_profile = UserProfile(user=request.user)
+        user_profile.save()
+    if request.method=='POST':
+        form = UserProfileForm(request.POST,instance=user_profile)
+        if form.is_valid():
+            form.save()
+    else:
+        form = UserProfileForm(instance=user_profile)
+    return render(request,'home/dashboard.html',{'form':form})
