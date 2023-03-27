@@ -43,7 +43,7 @@ Home page
               <div class="card-body">
                 <h6 class="card-title" id = "namepr{{i.slug}}">{{i.book_name}}</h6>
                 <small><p class="card-text text-danger" >&#2547;{{i.price}}</p></small>
-                <span id='divpr{{i.slug}}'><button id='pr{{i.slug}}' class="btn btn-primary cart"><b>Add To Cart</b></button></span>
+                <span id='divpr{{i.slug}}'><button id='pr{{i.slug}}' price = '{{i.price}}' class="btn btn-primary cart"><b>Add To Cart</b></button></span>
               </div>
             </div>
           </div>
@@ -61,7 +61,7 @@ Home page
             <div class="card-body">
               <h6 class="card-title" id = "namepr{{i.slug}}">{{i.book_name}}</h6>
               <small><p class="card-text text-danger" >&#2547;{{i.price}}</p></small>
-              <span id='divpr{{i.slug}}'><button id='pr{{i.slug}}' class="btn btn-primary cart"><b>Add To Cart</b></button></span>
+              <span id='divpr{{i.slug}}'><button id='pr{{i.slug}}' price = '{{i.price}}' class="btn btn-primary cart"><b>Add To Cart</b></button></span>
             </div>
           </div>
         </div>
@@ -106,14 +106,15 @@ if (localStorage.getItem('cart') == null) {
 // If the add to cart button is clicked, add/increment the item
 $('.cart').click(function() {
     var idstr = this.id.toString();
-    //console.log(idstr)
+    //console.log(this)
     if (cart[idstr] != undefined) {
         qty = cart[idstr][0] + 1;
     } else {
         qty = 1;
         name = document.getElementById('name'+idstr).innerHTML;
-        cart[idstr] = [qty,name];
-        console.log(cart[idstr][1])
+        price = this.getAttribute('price')
+        cart[idstr] = [qty,name,price];
+        //console.log(cart[idstr])
     }
     updateCart(cart);
     updatePopover(cart)
