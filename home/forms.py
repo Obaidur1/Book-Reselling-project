@@ -49,3 +49,12 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields:fields = ['full_name','address', 'address2', 'city', 'state', 'zip_code', 'phone_number']
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['full_name'].widget.attrs.update({'class': 'form-control'})
+        self.fields['address'].widget.attrs.update({'class': 'form-control'})
+        self.fields['address2'].widget.attrs.update({'class': 'form-control'})
+        self.fields['city'].widget.attrs.update({'class': 'form-control'})
+        self.fields['state'].widget.attrs.update({'class': 'form-control'})
+        self.fields['zip_code'].widget.attrs.update({'class': 'form-control'})
+        self.fields['phone_number'].widget.attrs.update({'class': 'form-control'})
