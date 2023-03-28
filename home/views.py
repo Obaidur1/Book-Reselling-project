@@ -109,6 +109,8 @@ def checkout(request):
         id = order.order_id
         return render(request, 'home/checkout.html', {'thank':thank, 'id': id})
     return render(request, 'home/checkout.html')
+
+
 @login_required(login_url='/loginsignup')
 def TrackOrder(request):
     mail = request.user.email
