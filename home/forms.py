@@ -10,7 +10,8 @@ class sellbookform(forms.ModelForm):
             'category',
             'price',
             'image',
-            'pickuplocation'
+            'pickuplocation',
+            'sellername',
         ]
     book_name = forms.CharField(
         widget=forms.TextInput(attrs={
@@ -26,6 +27,11 @@ class sellbookform(forms.ModelForm):
     )
 
     price = forms.IntegerField(
+        widget=forms.NumberInput(attrs={
+            'class': 'form-control'
+        })
+    )
+    sellername = forms.IntegerField(
         widget=forms.NumberInput(attrs={
             'class': 'form-control'
         })
