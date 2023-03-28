@@ -39,7 +39,8 @@ Home page
 
         <div class="col-xs-2 col-sm-2 col-md-2 text-center" style="display: inline-block;">
           <div class="card mb-5" style="width: 10rem;">
-            <img src='{{i.image.url}}' class="card-img-top p-2" style="width: 158px; height: 230px;">
+            <a href="{{ i.slug }}"><img src='{{i.image.url}}' class="card-img-top p-2"
+                style="width: 158px; height: 230px;"></a>
             <div class="card-body">
               <h6 class="card-title" id="namepr{{i.slug}}">{{i.book_name}}</h6>
               <small>
@@ -60,7 +61,8 @@ Home page
 
         <div class="col-xs-2 col-sm-2 col-md-2 text-center" style="display: inline-block;">
           <div class="card mb-5" style="width: 10rem;">
-            <img src='{{i.image.url}}' class="card-img-top p-2" style="width: 158px; height: 230px;">
+            <a href="{{i.slug}}"><img src='{{i.image.url}}' class="card-img-top p-2"
+                style="width: 158px; height: 230px;"></a>
             <div class="card-body">
               <h6 class="card-title" id="namepr{{i.slug}}">{{i.book_name}}</h6>
               <small>

@@ -1,5 +1,5 @@
 import json
-from django.shortcuts import render,HttpResponse,redirect
+from django.shortcuts import get_object_or_404, render,HttpResponse,redirect
 from .models import books
 from django.contrib.auth.models import User
 from django.contrib.auth import login,logout,authenticate
@@ -79,7 +79,7 @@ def savebook(request):
     price =  request.POST.get('price')
     image =  request.FILES['image']
     pickuplocation =  request.POST.get('pickuplocation')
-    slug = book_name.replace(" ", "+") + "+by+" + str(sellername)
+    slug = book_name.replace(" ", "-") + "-by-" + str(sellername)
     newbook = books.objects.create(sellername=sellername, book_name = book_name, category = category, price= price,image= image,pickuplocation = pickuplocation, slug= slug)
     try:
         newbook.save()
@@ -168,3 +168,12 @@ def dashboard_view(request):
     else:
         form = UserProfileForm(instance=user_profile)
     return render(request,'home/dashboard.html',{'form':form})
+
+
+#book details
+def book_details(request, slug):
+    book = get_object_or_404(books, slug=slug)
+    context = {
+        'book': book
+    }
+    return render(request, 'home/book_details.html', context)

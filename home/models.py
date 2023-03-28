@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.text import slugify
 
 # Create your models here.
 
@@ -9,13 +10,13 @@ class books(models.Model):
     category = models.CharField(max_length=50, default="")
     price = models.IntegerField(default=0)
     image = models.ImageField(upload_to="home/images",default="")
-    slug = models.CharField(max_length=1000, default="")
+    slug = models.SlugField(max_length=1000, default="")
     sellername = models.CharField(max_length=100, default="")
     pickuplocation = models.CharField(max_length=1000, default="")
 
     def __str__(self):
         return self.book_name
-
+    
 class Order(models.Model):
     order_id = models.AutoField(primary_key=True)
     items_json = models.CharField(max_length=50000)
