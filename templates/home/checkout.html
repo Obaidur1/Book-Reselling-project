@@ -60,17 +60,34 @@
             </div>
             <button type="submit" class="btn btn-outline-primary btn-lg btn-block mt-5 mb-5">Place Order</button>
         </form>
+        <form action="/payment" method="post">
+            {% csrf_token %}
+            <button class="your-button-class" id="sslczPayBtn" token="if you have any token validation"
+                postdata="";
+                order="If you already have the transaction generated for current order" > Pay Now
+            </button>
+        </form>
         <button class="your-button-class" id="sslczPayBtn"
-        token="if you have any token validation"
-        postdata="your javascript arrays or objects which requires in backend"
-        order="If you already have the transaction generated for current order"
-        endpoint="An URL where backend code will initiate the payment to SSLCOMMERZ"> Pay Now
-        </button>
-            
+		 token=""
+		 postdata=""
+		 order=""
+		 endpoint=""> SSL
+</button>
+
     </div>
 </div>
 {% endblock %}
 {% block script %}
+<script>(function (window, document) {
+	var loader = function () {
+	    var script = document.createElement("script"), tag = document.getElementsByTagName("script")[0];
+	    script.src = "https://sandbox.sslcommerz.com/embed.min.js?" + Math.random().toString(36).substring(7);
+	    tag.parentNode.insertBefore(script, tag);
+	};
+
+	window.addEventListener ? window.addEventListener("load", loader, false) : window.attachEvent("onload", loader);
+})(window, document);
+</script>
 <script>
     if (localStorage.getItem('cart') == null) {
         var cart = {};
@@ -107,16 +124,29 @@
     document.location = "/";
     {% endif %}
 
-    //test payment gateway
-    (function (window, document) {
-        var loader = function () {
-            var script = document.createElement("script"), tag = document.getElementsByTagName("script")[0];
-            script.src = "https://sandbox.sslcommerz.com/embed.min.js?" + Math.random().toString(36).substring(7);
-            tag.parentNode.insertBefore(script, tag);
-        };
-    
-        window.addEventListener ? window.addEventListener("load", loader, false) : window.attachEvent("onload", loader);
-    })(window, document);
-    //end test    
+
+    //ssl 
+    $(document).ready(function () {
+        $('#sslczPayBtn').prop('postdata', {
+            "user_id": "user1",
+            "user_name": "name",
+            "user_email": "email@gmail.com",
+            "total_amount":500,
+            "store_id": "hadij62073c48e7d22",
+            "store_passwd": "hadij62073c48e7d22@ssl",
+            "currency": "BDT",
+            "tran_id":"234rfc",
+            "product_category":"book",
+            "success_url":"/",
+            "fail_url":"/",
+            "cancel_url":"/",
+
+        });
+        $('#sslczPayBtn').prop('order', "your_order_id");
+        $('#sslczPayBtn').prop('endpoint', "");
+        $('#sslczPayBtn').on('click', function (event) {
+            sslczPayBtn(event);
+        });
+    });
 </script>
 {% endblock %}

@@ -18,6 +18,8 @@ urlpatterns = [
     path('checkout',views.checkout,name='checkout'),
     path('orders',views.my_orders,name='orders'),
     path('profile',views.dashboard_view,name='profile'),
-    path('<slug:slug>/', views.book_details, name='book_details')
+    path('payment', views.payment, name='payment'),
+    path('<slug:slug>/', views.book_details, name='book_details'),
+    
 
 ]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

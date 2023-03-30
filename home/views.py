@@ -7,6 +7,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from . forms import sellbookform ,UserProfileForm
 from .models import Order,TrackUpdate,UserProfile
+import requests
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 def loginsignup(request):
     return render(request,'home/loginlink.html')
@@ -177,3 +179,40 @@ def book_details(request, slug):
         'book': book
     }
     return render(request, 'home/book_details.html', context)
+
+
+#payment
+@csrf_exempt
+def payment(request):
+    if request.method == 'POST':
+        amount = 500
+        # Set the parameters for the SSLCOMMERZ API
+        params = {
+            'store_id': 'hadij62073c48e7d22',
+            'store_passwd': 'hadij62073c48e7d22@ssl',
+            'total_amount': amount,
+            'currency': 'BDT',
+            'tran_id': 'your_transaction_id',
+            'success_url': 'http://127.0.0.1:8000/',
+            'fail_url': 'http://127.0.0.1:8000/',
+            'cancel_url': 'http://127.0.0.1:8000/',
+            'emi_option': 0,
+            'cus_name': 'your_customer_name',
+            'cus_email': 'your_customer_email',
+            'cus_phone': 'your_customer_phone',
+            'cus_add1': 'your_customer_address',
+            'cus_city': 'your_customer_city',
+            'cus_country': 'Bangladesh',
+            'shipping_method': 'NO',
+            'product_name': 'your_product_name',
+            'product_category': 'your_product_category',
+            'product_profile': 'your_product_profile'
+        }
+        # Send a request to the SSLCOMMERZ API to initiate the payment
+        response = requests.post('https://sandbox.sslcommerz.com/gwprocess/v4/api.php', data=params)
+        # Parse the response and get the payment gateway URL
+        response_data = response.json()
+        gateway_url = response_data['GatewayPageURL']
+        # Redirect the user to the payment gateway URL
+        return redirect(gateway_url)
+    
