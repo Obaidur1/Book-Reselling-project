@@ -20,6 +20,7 @@ urlpatterns = [
     path('profile',views.dashboard_view,name='profile'),
     path('payment', views.payment, name='payment'),
     path('<slug:slug>/', views.book_details, name='book_details'),
+    path('our-team',views.our_team,name='our_team'),
     
 
 ]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

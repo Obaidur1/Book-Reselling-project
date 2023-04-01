@@ -42,6 +42,9 @@
           <a class="nav-link" href="TrackOrder">Track Order</a>
         </li>
         {% endif %}
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'our_team' %}">Our Team</a>
+        </li>
       </ul>
       <form action="search" method="get" class="form-inline my-2 my-lg-0">
         {% csrf_token %}
@@ -247,7 +250,7 @@ sagittis lacus vel augue laoreet rutrum faucibus.">
 
               <div style="text-align: center">
                 <h5 style="margin-top: 30%">
-                  Don't Have SellBookOnline Account?
+                  Don't Have Boighor Account?
                 </h5>
                 <button data-dismiss="modal" type="button" class="mt-4 btn btn-outline-success btn-block"
                   data-toggle="modal" data-target="#signupmodal">
@@ -275,7 +278,7 @@ sagittis lacus vel augue laoreet rutrum faucibus.">
       <footer class="py-3 my-4">
         <ul class="nav justify-content-center border-bottom pb-3 mb-3">
           <li class="nav-item"><a href="/" class="nav-link px-2 text-muted">Home</a></li>
-          <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
+          <li class="nav-item"><a href="{% url 'our_team' %}" class="nav-link px-2 text-muted">Our Team</a></li>
           <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
           <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
         </ul>

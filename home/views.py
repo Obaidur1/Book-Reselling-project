@@ -216,3 +216,7 @@ def payment(request):
         # Redirect the user to the payment gateway URL
         return redirect(gateway_url)
     
+
+
+def our_team(request):
+    return render(request,'home/our_team.html')
