@@ -6,4 +6,8 @@ This is a book selling site, where you can get new as well as old books at an af
 Order a book, and get a speedy delivery, you can also track your order. Have great books and don't need them anymore? We have potential buyers for you. We have every genre, buy/sell according to your need. Perks? You don't need to worry about your security. Your privacy is important to us. 
 # Technology Stack:
 - Django :snake:
+- TailwindCSS
 
+# Team Members
+[Reyad Hassan](https://github.com/hassanreyad/)
+[Obaidur Rahman](https://github.com/obaidur1/)
