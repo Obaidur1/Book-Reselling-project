@@ -7,6 +7,7 @@ Order a book, and get a speedy delivery, you can also track your order. Have gre
 # Technology Stack:
 - Django :snake:
 - TailwindCSS
+- Django Template Language
 
 # Team Members
 [Reyad Hassan](https://github.com/hassanreyad/)
